@@ -17,3 +17,18 @@ export const fetchCurrentWeather = (params) => {
       throw error;
     });
 }
+
+export const fetchLocation = (location) => {
+  return axios.get("https://geocoding-api.open-meteo.com/v1/search", {params: { name: location, count: 10 }})
+  .then(response => response.data)
+  .catch((error) => {
+    if (error.response?.status === 400) {
+      error.message = "400: Bad Request"
+    } else if (error.response?.status === 404) {
+      error.message = "404: Not Found"
+    } else {
+      error.message = "Failed to collect weather data at the specified location";
+    }
+    throw error;
+  })
+}
