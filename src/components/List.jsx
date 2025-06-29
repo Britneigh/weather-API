@@ -31,10 +31,12 @@ const handleLocation = (location) => {
     <div>
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error.message}</p>}
+        <div className="locations">
         {list && list.map((location, index) =>
-        <div onClick={() => handleLocation(location)} key={index}>
+        <div className="location-card" onClick={() => handleLocation(location)} key={index}>
             <p>{location.name}, {location.country}</p>
         </div>)}
+        </div>
     </div>
   )
 }

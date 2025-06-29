@@ -8,6 +8,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Home */
+
 .home {
   margin: 1%;
   display: flex;
@@ -18,6 +20,7 @@ body {
   border-radius: 4%;
 }
 
+/* SearchBar */
 .search-bar {
   padding: 5%;
 }
@@ -25,4 +28,23 @@ body {
 .search-field {
   width: 16vw;
   height: 4vh;
+}
+
+/* List */
+
+.locations {
+  font-size: large;
+  width: 100%;
+  height: auto;
+  background-color: white;
+}
+
+.location-card {
+  padding: 1%;
+}
+
+.location-card:hover {
+  background-color: bisque;
+  font-weight: bold;
+  cursor: pointer;
 }

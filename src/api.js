@@ -47,7 +47,7 @@ export const fetchCurrentWeather = (locationData) => {
 }
 
 export const fetchLocation = (location) => {
-  return axios.get("https://geocoding-api.open-meteo.com/v1/search", {params: { name: location, count: 10 }})
+  return axios.get("https://geocoding-api.open-meteo.com/v1/search", {params: { name: location, count: 5 }})
   .then(response => response.data)
   .catch((error) => {
     if (error.response?.status === 400) {
