@@ -35,7 +35,7 @@ export const fetchCurrentWeather = (locationData) => {
   }
 
   return api.get("/v1/forecast", {params})
-    .then(response => response)
+    .then(response => response.data)
     .catch(error => {
       if (error.response?.status === 400) {
         error.message = "400: Bad Request";
