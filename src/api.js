@@ -27,6 +27,9 @@ export const fetchCurrentWeather = (locationData) => {
     end_date: currentDate
   };
 
+  if (!params.latitude || !params.longitude) {
+    return Promise.reject(new Error("400: Bad Request"));
+  }
   if (typeof params.latitude !== "number" || typeof params.longitude !== "number") {
     return Promise.reject(new Error("400: Bad Request"));
   }
