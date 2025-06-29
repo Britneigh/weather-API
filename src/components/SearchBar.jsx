@@ -11,9 +11,9 @@ const SearchBar = () => {
   }
 
   return (
-  <div>
+  <div className="search-bar">
     <form>
-      <input type="text" placeholder="Enter a location here" value={input} onChange={handleChange}></input>
+      <input type="text" className="search-field" placeholder="Enter a location here..." value={input} onChange={handleChange}></input>
     </form>
     <List input={input} setInput={setInput}/>
   </div>

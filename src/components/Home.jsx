@@ -28,7 +28,7 @@ const Home = () => {
 
   return (
     <LocationContext.Provider value={{location, setLocation}}>
-    <div>
+    <div className="home">
       <SearchBar/>
     </div>
     </LocationContext.Provider>
