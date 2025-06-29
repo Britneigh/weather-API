@@ -4,7 +4,32 @@ export const api = axios.create({
   baseURL: "https://api.open-meteo.com/",
 });
 
-export const fetchCurrentWeather = (params) => {
+  const getCurrentDate = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const currentDate = getCurrentDate();
+
+export const fetchCurrentWeather = (locationData) => {
+  const params = {
+    latitude: locationData.latitude,
+    longitude: locationData.longitude,
+    daily: "sunrise,sunset,uv_index_max,precipitation_sum",
+    hourly: "temperature_2m,weather_code,uv_index",
+    models: "best_match",
+    current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature",
+    timezone: locationData.timezone || "auto",
+    start_date: currentDate,
+    end_date: currentDate
+  };
+
+  if (typeof params.latitude !== "number" || typeof params.longitude !== "number") {
+    return Promise.reject(new Error("400: Bad Request"));
+  }
 
   return api.get("/v1/forecast", {params})
     .then(response => response)
@@ -27,7 +52,7 @@ export const fetchLocation = (location) => {
     } else if (error.response?.status === 404) {
       error.message = "404: Not Found"
     } else {
-      error.message = "Failed to collect weather data at the specified location";
+      error.message = "Failed to fetch weather data at the specified location";
     }
     throw error;
   })
