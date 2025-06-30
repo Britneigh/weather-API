@@ -16,7 +16,7 @@ describe('fetchCurrentWeather', () => {
     const params = {      //Paris
       latitude: 48.85,
       longitude: 2.35,
-      daily: "sunrise,sunset,uv_index_max,precipitation_sum",
+      daily: "sunrise,sunset,uv_index_max,precipitation_sum,temperature_2m_max,temperature_2m_min",
       hourly: "temperature_2m,weather_code,uv_index",
       models: "best_match",
       current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature",
@@ -26,7 +26,7 @@ describe('fetchCurrentWeather', () => {
     };
 
     const fixedParams = {
-      daily: "sunrise,sunset,uv_index_max,precipitation_sum",
+      daily: "sunrise,sunset,uv_index_max,precipitation_sum,temperature_2m_max,temperature_2m_min",
       hourly: "temperature_2m,weather_code,uv_index",
       models: "best_match",
       current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature"
@@ -50,19 +50,17 @@ describe('fetchCurrentWeather', () => {
 
     return fetchCurrentWeather(params)
     .then((response) => {
-        expect(response.status).toBe(200);
-
-        const data = response.data;
+      console.log(response)
         
-        expect(data.latitude).toBeCloseTo(48.84, 2);
-        expect(data.longitude).toBeCloseTo(2.3599997, 2);
+        expect(response.latitude).toBeCloseTo(48.84, 2);
+        expect(response.longitude).toBeCloseTo(2.3599997, 2);
     })
   });
   test("400: Bad Request when given invalid parameters", () => {
     const invalidParams = {
         latitude: 'test',
         longitude: 'test',
-        daily: "sunrise,sunset,uv_index_max,precipitation_sum",
+        daily: "sunrise,sunset,uv_index_max,precipitation_sum,temperature_2m_max,temperature_2m_min",
         hourly: "temperature_2m,weather_code,uv_index",
         models: "best_match",
         current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature",
@@ -88,7 +86,7 @@ describe('fetchCurrentWeather', () => {
         const params = {
             latitude: 48.85,
             longitude: 2.35,
-            daily: "sunrise,sunset,uv_index_max,precipitation_sum",
+            daily: "sunrise,sunset,uv_index_max,precipitation_sum,temperature_2m_max,temperature_2m_min",
             hourly: "temperature_2m,weather_code,uv_index",
             models: "best_match",
             current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature",
@@ -121,7 +119,7 @@ describe("fetchLocation", () => {
             expect(element).toHaveProperty("latitude");
             expect(element).toHaveProperty("longitude");
         }));
-        expect(data.length).toBe(10);
+        expect(data.length).toBe(5);
     });
   });
   test("Returns the correct weather information for the chosen location", () => {
@@ -132,7 +130,7 @@ describe("fetchLocation", () => {
         const params = {
             latitude: chosenLocation.latitude,
             longitude: chosenLocation.longitude,
-            daily: "sunrise,sunset,uv_index_max,precipitation_sum",
+            daily: "sunrise,sunset,uv_index_max,precipitation_sum,temperature_2m_max,temperature_2m_min",
             hourly: "temperature_2m,weather_code,uv_index",
             models: "best_match",
             current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature",
@@ -145,13 +143,10 @@ describe("fetchLocation", () => {
     .then((params) => {
         return fetchCurrentWeather(params)
         .then((response) => {
-          expect(response.status).toBe(200);
-
-          const data = response.data;
-          expect(data).toHaveProperty("latitude");
-          expect(data).toHaveProperty("longitude");
-          expect(data.latitude).toBeCloseTo(51.5, 2);
-          expect(data.longitude).toBeCloseTo(-0.12, 2);
+          expect(response).toHaveProperty("latitude");
+          expect(response).toHaveProperty("longitude");
+          expect(response.latitude).toBeCloseTo(51.5, 2);
+          expect(response.longitude).toBeCloseTo(-0.12, 2);
         })
     });
     });

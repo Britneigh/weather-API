@@ -3,6 +3,7 @@ body {
   display: flex;
   place-items: center;
   justify-content: center;
+  align-items: flex-start;
   min-width: 320px;
   min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
@@ -13,38 +14,87 @@ body {
 .home {
   margin: 1%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   width: 40vw;
   height: 100vh;
+  overflow-y: auto;
   background-color: rgb(157, 219, 228);
   border-radius: 4%;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: center;
+  width: 100%;
+  margin: 5%;
+  gap: 5%;
+}
+
 /* SearchBar */
 .search-bar {
-  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 50%;
+  border: solid 1px black;
+  box-sizing: border-box;
 }
 
 .search-field {
-  width: 16vw;
-  height: 4vh;
+  width: 100%;
+  padding: 5%;
+  box-sizing: border-box;
 }
 
 /* List */
 
 .locations {
-  font-size: large;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  font-size: medium;
   width: 100%;
   height: auto;
   background-color: white;
+  overflow-y: auto;
+  z-index: 2;
+  box-sizing: border-box;
 }
 
 .location-card {
+  width: 100%;
   padding: 1%;
+  box-sizing: border-box;
 }
 
 .location-card:hover {
   background-color: bisque;
   font-weight: bold;
   cursor: pointer;
+}
+
+/* CurrentWeather */
+
+.weather-img {
+  width: 100%;
+  height: auto;
+}
+
+.col {
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 5%;
+}
+
+.weather-info {
+  background-color: hsla(180, 100%, 97%, 0.418);
+  border-radius: 5%;
+  border: solid 0.2em white;
+  box-shadow: 0.2em 0.1em 1em white;
 }
