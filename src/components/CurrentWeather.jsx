@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { LocationContext, WeatherContext } from "../App";
 
-const CurrentWeather = ({weatherData, location}) => {
+const CurrentWeather = () => {
     const weatherIconMap = {
         0: ["0-clear-sky.png", "Clear sky"],
         1: ["1-mainly-clear.png", "Mainly clear"], 2: ["2-3-cloudy.png", "Partly cloudy"], 3: ["2-3-cloudy.png", "Overcast"],
@@ -19,6 +21,8 @@ const CurrentWeather = ({weatherData, location}) => {
         99: ["99-thunderstorm-hail.png", "Thunderstorm with heavy hail"]
     }
     const [weatherCode, setWeatherCode] = useState(0);
+    const {location} = useContext(LocationContext);
+    const {weatherData} = useContext(WeatherContext);   
 
 useEffect(() => {
     if (weatherData?.current?.weather_code) {

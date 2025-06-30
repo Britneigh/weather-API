@@ -3,8 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { fetchWeeklyWeather } from "../api";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { LocationContext } from "../App";
 
-const ForecastWeekly = ({location}) => {
+const ForecastWeekly = () => {
+    const {location} = useContext(LocationContext);
     const weatherIconMap = {
         0: ["0-clear-sky.png", "Clear sky"],
         1: ["1-mainly-clear.png", "Mainly clear"], 2: ["2-3-cloudy.png", "Partly cloudy"], 3: ["2-3-cloudy.png", "Overcast"],
@@ -110,8 +113,11 @@ const checkScrollPosition = () => {
 };
 
 const handleClick = (day) => {
-navigate("/" + day);
+  const selectedDate = day.date.toISOString().split("T")[0];
+  navigate("/" + selectedDate);
 }
+
+console.log(weeklyData);
 
   return (
     <div className="forecast-hourly-container">
