@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-
 const CurrentWeather = ({weatherData, location}) => {
     const weatherIconMap = {
         0: ["0-clear-sky.png", "Clear sky"],
@@ -44,13 +43,13 @@ useEffect(() => {
             (<>
             <p>{location.name}</p>
             <p>{weatherDesc}</p>
-            <p>{weatherData?.current?.temperature_2m} {weatherData?.current_units?.temperature_2m}</p>
+            <p>{weatherData?.current?.temperature_2m}{weatherData?.current_units?.temperature_2m}</p>
             <p>(Feels like: {weatherData?.current?.apparent_temperature})</p>
             <div className="row">
             <p>Max: </p>
-            <p>{weatherData?.daily?.temperature_2m_max} {weatherData?.current_units?.temperature_2m} </p>
+            <p>{weatherData?.daily?.temperature_2m_max}{weatherData?.current_units?.temperature_2m} </p>
             <p>Min: </p>
-            <p>{weatherData?.daily?.temperature_2m_min} {weatherData?.current_units?.temperature_2m} </p>
+            <p>{weatherData?.daily?.temperature_2m_min}{weatherData?.current_units?.temperature_2m} </p>
             </div>
             </>) : null}
         </div>

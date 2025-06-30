@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { createContext } from "react";
 import { fetchCurrentWeather } from "../api";
 import CurrentWeather from "./CurrentWeather";
+import ForecastHourly from "./ForecastHourly";
 
 export const LocationContext = createContext();
 
@@ -32,9 +33,15 @@ const Home = () => {
       <div className="row">
         <SearchBar />
       </div>
-      <div className="row">
-        <CurrentWeather weatherData={weatherData} location={location}/>
+      {location.name ? (
+        <>
+        <div className="row">
+        <CurrentWeather weatherData={weatherData} location={location} />
       </div>
+      <div className="row">
+      <ForecastHourly weatherData={weatherData} />
+      </div>
+      </>) : null}
     </div>
     </LocationContext.Provider>
   )
