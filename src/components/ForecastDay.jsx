@@ -3,7 +3,6 @@
 const ForecastDay = () => {
   return (
     <div>
-      
     </div>
   )
 }
