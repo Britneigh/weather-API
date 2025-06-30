@@ -8,7 +8,7 @@ Weather Icons attributes:
 - Foggy icons created by Freepik - Flaticon
 - Rain icons created by apien - Flaticon
 - Humidity icons created by Mihimihi - Flaticon
-- Snow icons created by Freepik - Flatico
+- Snow icons created by Freepik - Flaticon
 - Snowy icons created by berkahicon - Flaticon
 - Hail icons created by Freepik - Flaticon
 - Storm icons created by Andy Horvath - Flaticon

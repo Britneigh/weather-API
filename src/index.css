@@ -6,7 +6,8 @@ body {
   align-items: flex-start;
   min-width: 320px;
   min-height: 100vh;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
 }
 
 /* Home */
@@ -21,6 +22,10 @@ body {
   overflow-y: auto;
   background-color: rgb(157, 219, 228);
   border-radius: 4%;
+}
+
+.home::-webkit-scrollbar {
+  display: none;
 }
 
 .row {
@@ -97,4 +102,64 @@ body {
   border-radius: 5%;
   border: solid 0.2em white;
   box-shadow: 0.2em 0.1em 1em white;
+}
+
+/* ForecastHourly */
+
+.forecast-hourly-container {
+  position: relative;
+  overflow: hidden;
+  background-color: hsla(180, 100%, 97%, 0.418);;
+  border-radius: 4%;
+  margin: 2%;
+}
+
+.horizontal-scroll {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-y: hidden;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  margin: 2%;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.hour-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 5%;
+  border: solid 0.2em white;
+  box-shadow: 0.1em 0.1em 0.5em white;
+  padding: 7.8%;
+  margin: 1%;
+}
+
+.scroll-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: white;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: hsl(0, 0%, 48%);
+  font-size: xx-large;
+}
+
+.scroll-arrow.left {
+  left: 0;
+}
+
+.scroll-arrow.right {
+  right: 0;
+}
+
+.today-text {
+  margin: 3%;
 }
