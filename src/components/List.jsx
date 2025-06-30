@@ -28,7 +28,7 @@ const handleLocation = (location) => {
 }
 
   return (
-    <div>
+    <>
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error.message}</p>}
         <div className="locations">
@@ -37,7 +37,7 @@ const handleLocation = (location) => {
             <p>{location.name}, {location.country}</p>
         </div>)}
         </div>
-    </div>
+    </>
   )
 }
 
