@@ -4,6 +4,7 @@ import { createContext } from "react";
 import { fetchCurrentWeather } from "../api";
 import CurrentWeather from "./CurrentWeather";
 import ForecastHourly from "./ForecastHourly";
+import ForecastWeekly from "./ForecastWeekly";
 
 export const LocationContext = createContext();
 
@@ -35,11 +36,14 @@ const Home = () => {
       </div>
       {location.name ? (
         <>
-        <div className="row">
+      <div className="row">
         <CurrentWeather weatherData={weatherData} location={location} />
       </div>
       <div className="row">
       <ForecastHourly weatherData={weatherData} />
+      </div>
+      <div className="row">
+      <ForecastWeekly location={location} />
       </div>
       </>) : null}
     </div>

@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { fetchWeeklyWeather } from "../api";
+import { useNavigate } from "react-router-dom";
 
-const ForecastHourly = ({weatherData}) => {
-        const weatherIconMap = {
+const ForecastWeekly = ({location}) => {
+    const weatherIconMap = {
         0: ["0-clear-sky.png", "Clear sky"],
         1: ["1-mainly-clear.png", "Mainly clear"], 2: ["2-3-cloudy.png", "Partly cloudy"], 3: ["2-3-cloudy.png", "Overcast"],
         45: ["45-48-fog.png", "Foggy"], 48: ["45-48-fog.png", "Depositing rime fog"],
@@ -23,32 +25,48 @@ const ForecastHourly = ({weatherData}) => {
     const leftArrow = <FontAwesomeIcon icon={faChevronLeft}/>
     const rightArrow = <FontAwesomeIcon icon={faChevronRight}/>
     
-    const [hourlyData, setHourlyData] = useState([]);
+    const [weeklyData, setWeeklyData] = useState([]);
+    const [weatherData, setWeatherData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(false);
     const scrollRef = useRef(null);
+    const navigate = useNavigate();
 
 useEffect(() => {
-  if (weatherData?.hourly) {
-    const { time, weather_code, temperature_2m } = weatherData.hourly;
+    if (!location.name) return;
+    setLoading(true);
+    fetchWeeklyWeather(location)
+    .then(response => {
+      setLoading(false);
+      setWeatherData(response);
+    })
+    .catch(error => {
+      setError(error.message);
+    })
+}, [location]);
+
+useEffect(() => {
+  if (weatherData?.daily) {
+    const { time, weather_code, temperature_2m_max, temperature_2m_min } = weatherData.daily;
     const currentTime = new Date(weatherData?.current?.time);
-    const nextDay = new Date(currentTime);
-    nextDay.setHours(currentTime.getHours() + 24);
     
 const data = time
       .map((timestamp, index) => {
         const date = new Date(timestamp);
         return {
           date: new Date(timestamp),
-          hour: date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+          day:  date.toLocaleDateString([], { weekday: 'short' }),
           icon: weatherIconMap[weather_code[index]]?.[0] || "",
-          temperature: temperature_2m[index]
+          maxTemp: temperature_2m_max[index],
+          minTemp: temperature_2m_min[index]
         };
       })
-       .filter(item => item.date >= currentTime && item.date < nextDay)
+      .filter(item => item.date >= currentTime)
       .sort((a, b) => a.date - b.date);
     
-    setHourlyData(data);
+    setWeeklyData(data);
   }
 }, [weatherData]);
 
@@ -69,7 +87,7 @@ useEffect(() => {
       scrollContainer.removeEventListener("scroll", handleScroll);
     }
   };
-}, [hourlyData]);
+}, [weatherData]);
 
 const scroll = (direction) => {
   const scrollAmount = 500;
@@ -91,15 +109,21 @@ const checkScrollPosition = () => {
   setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1);
 };
 
+const handleClick = (day) => {
+navigate("/" + day);
+}
+
   return (
     <div className="forecast-hourly-container">
+    <p className="today-text">7 Days Forecast:</p>
     {canScrollLeft && (<button onClick={() => scroll("left")} className="scroll-arrow left">{leftArrow}</button>)}
         <div className="horizontal-scroll" ref={scrollRef}>
-            {hourlyData.map((hour, index) => (
-                <div key={index} className="col hour-card">
-                    <p>{hour.hour}</p>
-                    <img src={`/weather-icons/${hour.icon}`} alt="weather icon" className="weather-img" />
-                    <p>{hour.temperature}{weatherData?.hourly_units?.temperature_2m}</p>
+            {weeklyData.map((day, index) => (
+                <div onClick={() => handleClick(day)} key={index} className="col week-card">
+                    <p>{day.day}</p>
+                    <img src={`/weather-icons/${day.icon}`} alt="weather icon" className="weather-img" />
+                    <p>{day.maxTemp}{weatherData?.hourly_units?.temperature_2m}</p>
+                    <p>{day.minTemp}{weatherData?.hourly_units?.temperature_2m}</p>
                 </div>
             ))}
         </div>
@@ -110,4 +134,4 @@ const checkScrollPosition = () => {
   )
 }
 
-export default ForecastHourly
+export default ForecastWeekly

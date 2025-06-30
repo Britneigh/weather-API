@@ -47,9 +47,9 @@ useEffect(() => {
             <p>(Feels like: {weatherData?.current?.apparent_temperature})</p>
             <div className="row">
             <p>Max: </p>
-            <p>{weatherData?.daily?.temperature_2m_max}{weatherData?.current_units?.temperature_2m} </p>
+            <p>{weatherData?.daily?.temperature_2m_max[0]}{weatherData?.current_units?.temperature_2m} </p>
             <p>Min: </p>
-            <p>{weatherData?.daily?.temperature_2m_min}{weatherData?.current_units?.temperature_2m} </p>
+            <p>{weatherData?.daily?.temperature_2m_min[0]}{weatherData?.current_units?.temperature_2m} </p>
             </div>
             </>) : null}
         </div>
