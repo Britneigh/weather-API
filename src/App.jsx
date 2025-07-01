@@ -25,8 +25,7 @@ function App() {
     .catch(error => {
       setError(error.message);
     })
-  }, [location])
-
+  }, [location.name])
   console.log("weatherData --->", weatherData);
   console.log("location -->", location);
 
@@ -36,7 +35,7 @@ function App() {
       <WeatherContext.Provider value={{weatherData}}>
       <Routes>
         <Route path="/" element={<Home weatherData={weatherData} location={location}/>} />
-        <Route path="/:day" element={<ForecastDay location={location}/>} />
+        <Route path="/:date" element={<ForecastDay />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       </WeatherContext.Provider>

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useContext } from "react";
-import { LocationContext, WeatherContext } from "../App";
+import { LocationContext } from "../App";
 
-const CurrentWeather = () => {
+const WeekdayWeather = ({weatherData, date}) => {
     const weatherIconMap = {
         0: ["0-clear-sky.png", "Clear sky"],
         1: ["1-mainly-clear.png", "Mainly clear"], 2: ["2-3-cloudy.png", "Partly cloudy"], 3: ["2-3-cloudy.png", "Overcast"],
@@ -22,7 +22,6 @@ const CurrentWeather = () => {
     }
     const [weatherCode, setWeatherCode] = useState(0);
     const {location} = useContext(LocationContext);
-    const {weatherData} = useContext(WeatherContext);   
 
 useEffect(() => {
     if (weatherData?.current?.weather_code) {
@@ -30,25 +29,32 @@ useEffect(() => {
     }
 }, [weatherData]);
 
-        const weatherImg = weatherIconMap[weatherCode]?.[0] || "";
-        const weatherDesc = weatherIconMap[weatherCode]?.[1] || "";
+    const weatherImg = weatherIconMap[weatherCode]?.[0] || "";
+    const weatherDesc = weatherIconMap[weatherCode]?.[1] || "";
+
+    const formattedDate = new Date(date);
+    const fullDate = formattedDate.toLocaleDateString('en-GB', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    });
 
   return (
     <div className="currentWeather-container row">
-        <div className="col">
-            {weatherImg ? (
-                <img className="weather-img" src={`/weather-icons/${weatherImg}`} alt={`Weather code: ${weatherCode}`} />
-            ) : (
-                null
-            )}
-        </div>
         <div className="col weather-info">
             {location.name !== undefined ? 
             (<>
+            <p>{fullDate}</p>
             <p>{location.name}</p>
+            {weatherImg ? (
+                <div className="weekday-img-section">
+                <img className="weather-img weekday" src={`/weather-icons/${weatherImg}`} alt={`Weather code: ${weatherCode}`} />
+                </div>
+            ) : (
+                null
+            )}
             <p>{weatherDesc}</p>
-            <p>{weatherData?.current?.temperature_2m}{weatherData?.current_units?.temperature_2m}</p>
-            <p>(Feels like: {weatherData?.current?.apparent_temperature}{weatherData?.current_units?.temperature_2m})</p>
             <div className="row">
             <p>Max: </p>
             <p>{weatherData?.daily?.temperature_2m_max[0]}{weatherData?.current_units?.temperature_2m} </p>
@@ -61,4 +67,4 @@ useEffect(() => {
   )
 }
 
-export default CurrentWeather
+export default WeekdayWeather
