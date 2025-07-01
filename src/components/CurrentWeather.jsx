@@ -34,19 +34,19 @@ useEffect(() => {
         const weatherDesc = weatherIconMap[weatherCode]?.[1] || "";
 
   return (
-    <div className="currentWeather-container row">
-        <div className="col">
+    <div className="current-weather-container row">
             {weatherImg ? (
-                <img className="weather-img" src={`/weather-icons/${weatherImg}`} alt={`Weather code: ${weatherCode}`} />
+                <div className="col">
+                    <img className="weather-img" src={`/weather-icons/${weatherImg}`} alt={`Weather code: ${weatherCode}`} />
+                </div>
             ) : (
                 null
             )}
-        </div>
         <div className="col weather-info">
             {location.name !== undefined ? 
             (<>
-            <p>{location.name}</p>
-            <p>{weatherDesc}</p>
+            <h2>{location.name}</h2>
+            <h3>{weatherDesc}</h3>
             <p>{weatherData?.current?.temperature_2m}{weatherData?.current_units?.temperature_2m}</p>
             <p>(Feels like: {weatherData?.current?.apparent_temperature}{weatherData?.current_units?.temperature_2m})</p>
             <div className="row">

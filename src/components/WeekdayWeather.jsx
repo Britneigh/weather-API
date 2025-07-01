@@ -41,12 +41,12 @@ useEffect(() => {
     });
 
   return (
-    <div className="currentWeather-container row">
+    <div className="current-weather-container row">
         <div className="col weather-info">
             {location.name !== undefined ? 
             (<>
             <p>{fullDate}</p>
-            <p>{location.name}</p>
+            <h1>{location.name}</h1>
             {weatherImg ? (
                 <div className="weekday-img-section">
                 <img className="weather-img weekday" src={`/weather-icons/${weatherImg}`} alt={`Weather code: ${weatherCode}`} />

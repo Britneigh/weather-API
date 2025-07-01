@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
 import { WeatherContext } from "../App";
 
 const ForecastHourly = () => {
@@ -95,7 +94,7 @@ const checkScrollPosition = () => {
 };
 
   return (
-    <div className="forecast-hourly-container">
+    <div className="forecast-container">
     {canScrollLeft && (<button onClick={() => scroll("left")} className="scroll-arrow left">{leftArrow}</button>)}
         <div className="horizontal-scroll" ref={scrollRef}>
             {hourlyData.map((hour, index) => (

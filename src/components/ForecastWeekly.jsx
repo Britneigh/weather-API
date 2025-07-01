@@ -119,7 +119,7 @@ const handleClick = (day) => {
 }
 
   return (
-    <div className="forecast-hourly-container">
+    <div className="forecast-container">
     <p className="today-text">7 Days Forecast:</p>
     {canScrollLeft && (<button onClick={() => scroll("left")} className="scroll-arrow left">{leftArrow}</button>)}
         <div className="horizontal-scroll" ref={scrollRef}>

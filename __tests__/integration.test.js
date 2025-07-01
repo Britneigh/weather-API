@@ -25,7 +25,7 @@ describe('fetchCurrentWeather', () => {
     const params = {      //Paris
       latitude: 48.85,
       longitude: 2.35,
-      daily: "sunrise,sunset,uv_index_max,precipitation_sum,temperature_2m_max,temperature_2m_min",
+      daily: "sunrise,sunset,uv_index_max,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum",
       hourly: "temperature_2m,weather_code,uv_index",
       models: "best_match",
       current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature",
@@ -35,7 +35,7 @@ describe('fetchCurrentWeather', () => {
     };
 
     const fixedParams = {
-      daily: "sunrise,sunset,uv_index_max,precipitation_sum,temperature_2m_max,temperature_2m_min",
+      daily: "sunrise,sunset,uv_index_max,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum",
       hourly: "temperature_2m,weather_code,uv_index",
       models: "best_match",
       current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature"
@@ -66,9 +66,9 @@ describe('fetchCurrentWeather', () => {
   });
   test("400: Bad Request when given invalid parameters", () => {
     const invalidParams = {
-        latitude: 'test',
-        longitude: 'test',
-        daily: "sunrise,sunset,uv_index_max,precipitation_sum,temperature_2m_max,temperature_2m_min",
+        latitude: "test",
+        longitude: "test",
+        daily: "sunrise,sunset,uv_index_max,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum",
         hourly: "temperature_2m,weather_code,uv_index",
         models: "best_match",
         current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature",
@@ -94,7 +94,7 @@ describe('fetchCurrentWeather', () => {
         const params = {
             latitude: 48.85,
             longitude: 2.35,
-            daily: "sunrise,sunset,uv_index_max,precipitation_sum,temperature_2m_max,temperature_2m_min",
+            daily: "sunrise,sunset,uv_index_max,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum",
             hourly: "temperature_2m,weather_code,uv_index",
             models: "best_match",
             current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature",
@@ -121,7 +121,7 @@ describe("fetchWeeklyWeather", () => {
         const params = {
         latitude: 51.5,
         longitude: -0.12,
-        daily: "weather_code,temperature_2m_max,temperature_2m_min",
+        daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum",
         hourly: "temperature_2m,weather_code,uv_index",
         models: "best_match",
         current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature",
@@ -129,7 +129,7 @@ describe("fetchWeeklyWeather", () => {
         };
 
         const fixedParams = {
-        daily: "weather_code,temperature_2m_max,temperature_2m_min",
+        daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum",
         hourly: "temperature_2m,weather_code,uv_index",
         models: "best_match",
         current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature"
@@ -202,7 +202,7 @@ describe("fetchWeeklyWeather", () => {
         const parisParams = {
             latitude: 48.85,
             longitude: 2.35,
-            daily: "weather_code,temperature_2m_max,temperature_2m_min",
+            daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum",
             hourly: "temperature_2m,weather_code,uv_index",
             models: "best_match",
             current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature",
@@ -240,7 +240,7 @@ describe("fetchLocation", () => {
         const params = {
             latitude: chosenLocation.latitude,
             longitude: chosenLocation.longitude,
-            daily: "sunrise,sunset,uv_index_max,precipitation_sum,temperature_2m_max,temperature_2m_min",
+            daily: "sunrise,sunset,uv_index_max,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum",
             hourly: "temperature_2m,weather_code,uv_index",
             models: "best_match",
             current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature",

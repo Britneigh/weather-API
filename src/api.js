@@ -41,7 +41,7 @@ export const fetchCurrentWeather = (locationData, dateStr) => {
   const params = {
     latitude: locationData.latitude,
     longitude: locationData.longitude,
-    daily: "sunrise,sunset,uv_index_max,precipitation_sum,temperature_2m_max,temperature_2m_min",
+    daily: "sunrise,sunset,uv_index_max,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum",
     hourly: "temperature_2m,weather_code,uv_index",
     models: "best_match",
     current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature",
@@ -88,7 +88,7 @@ export const fetchWeeklyWeather = (locationData) => {
   const params = {
     latitude: locationData.latitude,
     longitude: locationData.longitude,
-    daily: "weather_code,temperature_2m_max,temperature_2m_min",
+    daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum",
     hourly: "temperature_2m,weather_code,uv_index",
     models: "best_match",
     current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature",
