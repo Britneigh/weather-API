@@ -12,3 +12,6 @@ Weather Icons attributes:
 - Snowy icons created by berkahicon - Flaticon
 - Hail icons created by Freepik - Flaticon
 - Storm icons created by Andy Horvath - Flaticon
+- Sunset icon created by Slidicon - Flaticon
+- Sunrise icon created by kosonicon - Flaticon
+- Humidity icon created by sonnycandra - Flaticon

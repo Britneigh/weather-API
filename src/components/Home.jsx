@@ -2,6 +2,7 @@ import SearchBar from "./SearchBar"
 import CurrentWeather from "./CurrentWeather";
 import ForecastHourly from "./ForecastHourly";
 import ForecastWeekly from "./ForecastWeekly";
+import Misc from "./Misc";
 
 const Home = ({location}) => {
 
@@ -14,6 +15,9 @@ const Home = ({location}) => {
         <>
       <div className="row">
         <CurrentWeather />
+      </div>
+      <div className="row">
+        <Misc />
       </div>
       <div className="row">
       <ForecastHourly />
