@@ -5,14 +5,14 @@ export const api = axios.create({
 });
 
   const today = new Date();
-
-  const getCurrentDate = () => {
+export const getCurrentDate = () => {
   const year = today.getFullYear();
   const month = String(today.getMonth() + 1).padStart(2, '0');
   const day = String(today.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 };
-const getNextDate = () => {
+
+export const getNextDate = () => {
   today.setDate(today.getDate() + 1);
   const year = today.getFullYear();
   const month = String(today.getMonth() + 1).padStart(2, '0');
@@ -20,10 +20,24 @@ const getNextDate = () => {
   return `${year}-${month}-${day}`;
 };
 
-const currentDate = getCurrentDate();
-const nextDate = getNextDate();
 
-export const fetchCurrentWeather = (locationData) => {
+export const fetchCurrentWeather = (locationData, dateStr) => {
+  const parseDate = (str) => {
+    const [year, month, day] = str.split("-").map(Number);
+    return new Date(year, month - 1, day);
+  };
+
+  let startDate = dateStr || getCurrentDate();
+  let endDate = dateStr ? (() => {
+        const date = parseDate(dateStr);
+        date.setDate(date.getDate() + 1);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      })()
+    : getNextDate();
+
   const params = {
     latitude: locationData.latitude,
     longitude: locationData.longitude,
@@ -32,10 +46,10 @@ export const fetchCurrentWeather = (locationData) => {
     models: "best_match",
     current: "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,apparent_temperature",
     timezone: locationData.timezone || "auto",
-    start_date: currentDate,
-    end_date: nextDate
+    start_date: startDate,
+    end_date: endDate
   };
-
+  
   if (!params.latitude || !params.longitude) {
     return Promise.reject(new Error("400: Bad Request"));
   }

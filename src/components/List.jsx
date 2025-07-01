@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchLocation } from "../api";
 import { useContext } from "react";
-import { LocationContext } from "./Home";
+import { LocationContext } from "../App";
 
 const List = ({ input, setInput }) => {
     const [list, setList] = useState([]);

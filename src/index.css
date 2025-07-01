@@ -149,10 +149,13 @@ body {
   background-color: rgba(255, 255, 255, 0);
   font-size: 1.5rem;
   cursor: pointer;
-  color: hsl(0, 0%, 48%);
+  color: grey;
   font-size: xx-large;
 }
 
+.scroll-arrow:hover {
+  color: white;
+}
 .scroll-arrow.left {
   left: 0;
 }
@@ -179,4 +182,43 @@ body {
 
 .week-card:hover {
   cursor: pointer;
+}
+
+/*ForecastDay */
+
+.forecast-day-row {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: left;
+  width: 100%;
+  padding-top: 5%;
+  margin-left: 10%;
+}
+.back-btn {  
+    background-color: hsla(180, 100%, 97%, 0);
+    border: none;
+    border-radius: 1vh;
+    font-weight: bold;
+    font-size: xx-large;
+    box-sizing: border-box;
+    cursor: pointer;
+    color:grey;
+}
+
+.back-btn:hover {
+    color: white;
+}
+
+/* WeekdayWeather */
+
+.weekday-img-section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.weather-img.weekday {
+  width: 50%;
+  height: auto;
 }

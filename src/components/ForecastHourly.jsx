@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { useContext } from "react";
+import { WeatherContext } from "../App";
 
-const ForecastHourly = ({weatherData}) => {
+const ForecastHourly = () => {
         const weatherIconMap = {
         0: ["0-clear-sky.png", "Clear sky"],
         1: ["1-mainly-clear.png", "Mainly clear"], 2: ["2-3-cloudy.png", "Partly cloudy"], 3: ["2-3-cloudy.png", "Overcast"],
@@ -23,6 +25,7 @@ const ForecastHourly = ({weatherData}) => {
     const leftArrow = <FontAwesomeIcon icon={faChevronLeft}/>
     const rightArrow = <FontAwesomeIcon icon={faChevronRight}/>
     
+    const {weatherData} = useContext(WeatherContext);
     const [hourlyData, setHourlyData] = useState([]);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(false);
