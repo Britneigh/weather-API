@@ -21,6 +21,7 @@ const ForecastDay = () => {
     setLoading(true);
     fetchCurrentWeather(location, date)
     .then(response => {
+      setError(null);
       setLoading(false);
       setWeatherData(response);
     })
@@ -31,9 +32,8 @@ const ForecastDay = () => {
   }, [location.name, date])
 
   return (
-    <div className="home">
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
+    <>
+    {loading ? (<p>Loading...</p>) : (<div className="home">
       <div className="forecast-day-row">
       <Link to="/"><button className="back-btn">{backArrow}</button></Link>
       </div>
@@ -43,7 +43,9 @@ const ForecastDay = () => {
       <div className="row">
       <ForecastWeeklyHours weatherData={weatherData} />
       </div>
-    </div>
+    </div>)}
+    {error && <p>Error: {error}</p>}
+  </>
   )
 }
 
