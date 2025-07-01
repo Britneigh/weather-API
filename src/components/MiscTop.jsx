@@ -9,11 +9,11 @@ const MiscTop = () => {
   const sunset = new Date(weatherData?.daily?.sunset[0]).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
   return (
-    <div className="forecast-hourly-container row">
+    <div className="row">
       <div className="col">
-        <p className="wind-info">Wind Speed: {weatherData?.current?.wind_speed_10m} km/h</p>
-        <p className="wind-info">Wind Gust: {weatherData?.current?.wind_gusts_10m} km/h</p>
-        <p className="wind-info">Wind Direction: {weatherData?.current?.wind_direction_10m}°</p>
+        <p className="misc-info">Wind Speed: {weatherData?.current?.wind_speed_10m} km/h</p>
+        <p className="misc-info">Wind Gust: {weatherData?.current?.wind_gusts_10m} km/h</p>
+        <p className="misc-info">Wind Direction: {weatherData?.current?.wind_direction_10m}°</p>
     </div>
     
       <div className="block weather-info col">
