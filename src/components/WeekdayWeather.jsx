@@ -41,29 +41,27 @@ useEffect(() => {
     });
 
   return (
-    <div className="current-weather-container row">
+    <>
+    {location.name !== undefined ? 
+    (<div className="current-weather-container row">
         <div className="col weather-info">
-            {location.name !== undefined ? 
-            (<>
             <p>{fullDate}</p>
             <h1>{location.name}</h1>
             {weatherImg ? (
                 <div className="weekday-img-section">
                 <img className="weather-img weekday" src={`/weather-icons/${weatherImg}`} alt={`Weather code: ${weatherCode}`} />
-                </div>
-            ) : (
-                null
-            )}
+            </div>
+            ) : (null)}
             <p>{weatherDesc}</p>
             <div className="row">
-            <p>Max: </p>
-            <p>{weatherData?.daily?.temperature_2m_max[0]}{weatherData?.current_units?.temperature_2m} </p>
-            <p>Min: </p>
-            <p>{weatherData?.daily?.temperature_2m_min[0]}{weatherData?.current_units?.temperature_2m} </p>
+                <p>Max: </p>
+                <p>{weatherData?.daily?.temperature_2m_max[0]}{weatherData?.current_units?.temperature_2m} </p>
+                <p>Min: </p>
+                <p>{weatherData?.daily?.temperature_2m_min[0]}{weatherData?.current_units?.temperature_2m} </p>
             </div>
-            </>) : null}
         </div>
-    </div>
+    </div>) : null}
+    </>
   )
 }
 

@@ -94,7 +94,8 @@ const checkScrollPosition = () => {
 };
 
   return (
-    <div className="forecast-container">
+  <>
+  {weatherData ? (<div className="forecast-container">
     {canScrollLeft && (<button onClick={() => scroll("left")} className="scroll-arrow left">{leftArrow}</button>)}
         <div className="horizontal-scroll" ref={scrollRef}>
             {hourlyData.map((hour, index) => (
@@ -108,7 +109,8 @@ const checkScrollPosition = () => {
     {canScrollRight && (
     <button onClick={() => scroll("right")} className="scroll-arrow right">{rightArrow}</button>
     )}
-    </div>
+    </div>) : (null) }
+    </>
   )
 }
 

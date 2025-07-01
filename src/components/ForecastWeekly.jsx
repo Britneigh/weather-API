@@ -31,7 +31,7 @@ const ForecastWeekly = () => {
     const [weeklyData, setWeeklyData] = useState([]);
     const [weatherData, setWeatherData] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(false);
     const scrollRef = useRef(null);
@@ -42,6 +42,7 @@ useEffect(() => {
     setLoading(true);
     fetchWeeklyWeather(location)
     .then(response => {
+      setError("")
       setLoading(false);
       setWeatherData(response);
     })
@@ -119,9 +120,11 @@ const handleClick = (day) => {
 }
 
   return (
-    <div className="forecast-container">
-    <p className="today-text">7 Days Forecast:</p>
-    {canScrollLeft && (<button onClick={() => scroll("left")} className="scroll-arrow left">{leftArrow}</button>)}
+    <>
+      {loading ? <p>Loading...</p> : 
+      <div className="forecast-container">
+      <p className="today-text">7 Days Forecast:</p>
+      {canScrollLeft && (<button onClick={() => scroll("left")} className="scroll-arrow left">{leftArrow}</button>)}
         <div className="horizontal-scroll" ref={scrollRef}>
             {weeklyData.map((day, index) => (
                 <div onClick={() => handleClick(day)} key={index} className="col week-card">
@@ -132,10 +135,13 @@ const handleClick = (day) => {
                 </div>
             ))}
         </div>
-    {canScrollRight && (
-    <button onClick={() => scroll("right")} className="scroll-arrow right">{rightArrow}</button>
-    )}
+      {canScrollRight && (
+      <button onClick={() => scroll("right")} className="scroll-arrow right">{rightArrow}</button>
+      )}
     </div>
+    }
+    {error && <p>Error: {error}</p>}
+   </>
   )
 }
 

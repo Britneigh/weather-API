@@ -11,12 +11,11 @@ const MiscTop = () => {
   return (
     <div className="row">
       <div className="col">
-        <p className="misc-info">Wind Speed: {weatherData?.current?.wind_speed_10m} km/h</p>
-        <p className="misc-info">Wind Gust: {weatherData?.current?.wind_gusts_10m} km/h</p>
-        <p className="misc-info">Wind Direction: {weatherData?.current?.wind_direction_10m}°</p>
+        <div className="misc-info">Wind Speed: {weatherData?.current?.wind_speed_10m} km/h</div>
+        <div className="misc-info">Wind Gust: {weatherData?.current?.wind_gusts_10m} km/h</div>
+        <div className="misc-info">Wind Direction: {weatherData?.current?.wind_direction_10m}°</div>
     </div>
-    
-      <div className="block weather-info col">
+      <div className="weather-info col">
         <div className="sun-row">
         <img className="sun-img" src={`/weather-icons/${sunriseIcon}`} alt="sunrise"/>
         </div>
