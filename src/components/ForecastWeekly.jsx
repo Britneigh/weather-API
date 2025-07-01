@@ -123,7 +123,7 @@ const handleClick = (day) => {
     <>
       {loading ? <p>Loading...</p> : 
       <div className="forecast-container">
-      <p className="today-text">7 Days Forecast:</p>
+      <p className="today-text">7-Day Forecast:</p>
       {canScrollLeft && (<button onClick={() => scroll("left")} className="scroll-arrow left">{leftArrow}</button>)}
         <div className="horizontal-scroll" ref={scrollRef}>
             {weeklyData.map((day, index) => (
