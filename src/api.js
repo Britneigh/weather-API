@@ -4,8 +4,8 @@ export const api = axios.create({
   baseURL: "https://api.open-meteo.com/",
 });
 
-  const today = new Date();
 export const getCurrentDate = () => {
+  const today = new Date();
   const year = today.getFullYear();
   const month = String(today.getMonth() + 1).padStart(2, '0');
   const day = String(today.getDate()).padStart(2, '0');
@@ -13,10 +13,11 @@ export const getCurrentDate = () => {
 };
 
 export const getNextDate = () => {
-  today.setDate(today.getDate() + 1);
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  const day = String(today.getDate()).padStart(2, '0');
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const year = tomorrow.getFullYear();
+  const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
+  const day = String(tomorrow.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 };
 

@@ -5,18 +5,20 @@ afterEach(() => {
     jest.resetAllMocks();
 });
 
+
+const getCurrentDate = () => {
   const today = new Date();
-  const getCurrentDate = () => {
   const year = today.getFullYear();
   const month = String(today.getMonth() + 1).padStart(2, '0');
   const day = String(today.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
   };
-  const getNextDate = () => {
-  today.setDate(today.getDate() + 1);
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  const day = String(today.getDate()).padStart(2, '0');
+const getNextDate = () => {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const year = tomorrow.getFullYear();
+  const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
+  const day = String(tomorrow.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 };
 
@@ -2893,8 +2895,6 @@ describe("fetchLocation", () => {
     return fetchLocation(location)
     .then((response) => {
         expect(axios.get).toHaveBeenCalledWith("https://geocoding-api.open-meteo.com/v1/search", {params: { name: location, count: 5 }});
-        const currentDate = "2025-07-05";
-        const nextDate = "2025-07-06";
 
         const chosenLocation = response.results[0];
         const params = {
@@ -3192,281 +3192,7 @@ describe("fetchLocation", () => {
         .then((response) => {
             expect(api.get).toHaveBeenCalledWith("/v1/forecast", { params });
 
-            expect(response).toEqual({
-                "latitude": 51.5,
-                "longitude": -0.120000124,
-                "generationtime_ms": 0.5693435668945312,
-                "utc_offset_seconds": 3600,
-                "timezone": "Europe/London",
-                "timezone_abbreviation": "GMT+1",
-                "elevation": 23,
-                "current_units": {
-                "time": "iso8601",
-                "interval": "seconds",
-                "temperature_2m": "°C",
-                "relative_humidity_2m": "%",
-                "precipitation": "mm",
-                "weather_code": "wmo code",
-                "wind_speed_10m": "km/h",
-                "wind_direction_10m": "°",
-                "wind_gusts_10m": "km/h",
-                "apparent_temperature": "°C"
-                },
-                "current": {
-                "time": "2025-07-01T16:00",
-                "interval": 900,
-                "temperature_2m": 32.7,
-                "relative_humidity_2m": 37,
-                "precipitation": 0,
-                "weather_code": 3,
-                "wind_speed_10m": 11.6,
-                "wind_direction_10m": 263,
-                "wind_gusts_10m": 26.6,
-                "apparent_temperature": 33.1
-                },
-                "hourly_units": {
-                "time": "iso8601",
-                "temperature_2m": "°C",
-                "weather_code": "wmo code",
-                "uv_index": ""
-                },
-                "hourly": {
-                "time": [
-                "2025-06-24T00:00",
-                "2025-06-24T01:00",
-                "2025-06-24T02:00",
-                "2025-06-24T03:00",
-                "2025-06-24T04:00",
-                "2025-06-24T05:00",
-                "2025-06-24T06:00",
-                "2025-06-24T07:00",
-                "2025-06-24T08:00",
-                "2025-06-24T09:00",
-                "2025-06-24T10:00",
-                "2025-06-24T11:00",
-                "2025-06-24T12:00",
-                "2025-06-24T13:00",
-                "2025-06-24T14:00",
-                "2025-06-24T15:00",
-                "2025-06-24T16:00",
-                "2025-06-24T17:00",
-                "2025-06-24T18:00",
-                "2025-06-24T19:00",
-                "2025-06-24T20:00",
-                "2025-06-24T21:00",
-                "2025-06-24T22:00",
-                "2025-06-24T23:00",
-                "2025-06-25T00:00",
-                "2025-06-25T01:00",
-                "2025-06-25T02:00",
-                "2025-06-25T03:00",
-                "2025-06-25T04:00",
-                "2025-06-25T05:00",
-                "2025-06-25T06:00",
-                "2025-06-25T07:00",
-                "2025-06-25T08:00",
-                "2025-06-25T09:00",
-                "2025-06-25T10:00",
-                "2025-06-25T11:00",
-                "2025-06-25T12:00",
-                "2025-06-25T13:00",
-                "2025-06-25T14:00",
-                "2025-06-25T15:00",
-                "2025-06-25T16:00",
-                "2025-06-25T17:00",
-                "2025-06-25T18:00",
-                "2025-06-25T19:00",
-                "2025-06-25T20:00",
-                "2025-06-25T21:00",
-                "2025-06-25T22:00",
-                "2025-06-25T23:00"
-                ],
-                "temperature_2m": [
-                16,
-                15,
-                14.5,
-                14.4,
-                14.3,
-                14.2,
-                14.1,
-                14.5,
-                15.5,
-                16.5,
-                17,
-                18.1,
-                19.7,
-                22.4,
-                23.2,
-                23.7,
-                24.6,
-                24.9,
-                25.2,
-                23.7,
-                22.1,
-                21.4,
-                19.9,
-                19.3,
-                19,
-                18.8,
-                18.8,
-                18.2,
-                17.7,
-                17.2,
-                16.9,
-                17.2,
-                17.9,
-                18.8,
-                19.9,
-                21,
-                22.4,
-                23.5,
-                24.7,
-                25.3,
-                25.9,
-                26.8,
-                26.9,
-                26.5,
-                25.8,
-                24.9,
-                23.4,
-                22
-                ],
-                "weather_code": [
-                1,
-                1,
-                1,
-                2,
-                2,
-                3,
-                95,
-                3,
-                3,
-                3,
-                3,
-                3,
-                3,
-                3,
-                3,
-                3,
-                3,
-                2,
-                2,
-                3,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                1,
-                2,
-                2,
-                2,
-                2,
-                2,
-                3,
-                2,
-                3,
-                3,
-                3,
-                3,
-                3,
-                2,
-                2,
-                3,
-                2,
-                3,
-                3,
-                3
-                ],
-                "uv_index": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0.2,
-                0.85,
-                0.5,
-                0.45,
-                0.7,
-                1.75,
-                2.55,
-                2.6,
-                4.8,
-                3.3,
-                2.15,
-                2.6,
-                3.2,
-                1.95,
-                0.95,
-                0.25,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0.2,
-                0.8,
-                1.2,
-                1.45,
-                1.95,
-                4.05,
-                6.4,
-                6.85,
-                6.55,
-                4.4,
-                5.5,
-                4.4,
-                3.2,
-                2,
-                0.85,
-                0.25,
-                0,
-                0
-                ]
-                },
-                "daily_units": {
-                "time": "iso8601",
-                "weather_code": "wmo code",
-                "temperature_2m_max": "°C",
-                "temperature_2m_min": "°C",
-                "precipitation_probability_max": "%",
-                "precipitation_sum": "mm"
-                },
-                "daily": {
-                "time": [
-                "2025-06-24",
-                "2025-06-25"
-                ],
-                "weather_code": [
-                95,
-                3
-                ],
-                "temperature_2m_max": [
-                25.2,
-                26.9
-                ],
-                "temperature_2m_min": [
-                14.1,
-                16.9
-                ],
-                "precipitation_probability_max": [
-                50,
-                5
-                ],
-                "precipitation_sum": [
-                1,
-                0
-                ]
-                }
-            });
+            expect(response).toEqual(weatherMockResponse);
         })
     });
   });
